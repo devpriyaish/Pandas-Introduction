@@ -1,0 +1,25 @@
+#this data set is given
+import pandas as pd
+weather = pd.read_csv("nyc_weather.csv")
+weather
+
+#since we need only Temperature,EST,WindSpeedMPH & Events, we will drop all the other datas
+#inplace is used for permanent change in the dataset
+weather.drop(weather.columns[[2,3,4,5,7,8,10]], axis=1, inplace=True)
+weather.head()
+
+#What is the maximum temperature?
+weather['Temperature'].max()
+
+#Dates on which it rained?
+weather['EST'][weather['Events'] == 'Rain']
+
+#What is my average windspeed?
+#=============================
+#mean before cleaning the data
+weather['WindSpeedMPH'].mean()
+#cleaning the data
+weather.fillna(0, inplace=True)
+weather.head()
+#average after cleaning the data
+weather['WindSpeedMPH'].mean()
